@@ -1,0 +1,176 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API для управления логами Telegram-бота",
+    "version": "1.0.0",
+    "title": "Weather Bot Logs API"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/logs": {
+      "get": {
+        "summary": "Получить все логи",
+        "description": "Получить все логи с пагинацией и фильтрацией по времени",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Количество логов на странице",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "description": "Начальное время в формате ISO (YYYY-MM-DDTHH:MM:SS)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "description": "Конечное время в формате ISO (YYYY-MM-DDTHH:MM:SS)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_logs": {
+                  "type": "integer"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "logs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user_id": {
+                        "type": "integer"
+                      },
+                      "command": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logs/{user_id}": {
+      "get": {
+        "summary": "Получить логи конкретного пользователя",
+        "description": "Получить логи конкретного пользователя с пагинацией и фильтрацией по времени",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "ID пользователя",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Номер страницы",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Количество логов на странице",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "description": "Начальное время в формате ISO (YYYY-MM-DDTHH:MM:SS)",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "description": "Конечное время в формате ISO (YYYY-MM-DDTHH:MM:SS)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Успешный ответ",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_logs": {
+                  "type": "integer"
+                },
+                "page": {
+                  "type": "integer"
+                },
+                "per_page": {
+                  "type": "integer"
+                },
+                "logs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user_id": {
+                        "type": "integer"
+                      },
+                      "command": {
+                        "type": "string"
+                      },
+                      "response": {
+                        "type": "string"
+                      },
+                      "timestamp": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
